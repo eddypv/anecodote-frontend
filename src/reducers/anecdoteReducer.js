@@ -32,6 +32,11 @@ export  function anecdoteReducer(state = initialState, action) {
         return item
       })
       return newState
+
+    case 'ADD_ANECDOTE':
+
+      return [...state, action.payload]
+
     default: return state
   }
 }
@@ -40,6 +45,17 @@ export  function addVotes(id){
     type:'ADD_VOTES',
     payload:{
       id
+    }
+  }
+}
+
+export function addAnecdote(anecdote){
+  return {
+    type:'ADD_ANECDOTE',
+    payload:{
+      content:anecdote,
+      id:getId(),
+      votes:0
     }
   }
 }
