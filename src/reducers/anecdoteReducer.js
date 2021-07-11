@@ -20,9 +20,7 @@ const asObject = (anecdote) => {
 const initialState = anecdotesAtStart.map(asObject)
 
 export  function anecdoteReducer(state = initialState, action) {
-  console.log('state now: ', state)
-  console.log('action', action)
-  console.log('action', action.payload)
+  
   switch(action.type){
     case 'ADD_VOTES':
       const newState = state.map(item => {
