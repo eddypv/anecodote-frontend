@@ -32,14 +32,14 @@ export  function addVotes(id){
 }
 
 export function addAnecdote(anecdote){
-  return {
-    type:'ADD_ANECDOTE',
-    payload:{
-      content:anecdote,
-      id:getId(),
-      votes:0
-    }
+  return async dispatch =>{
+    const newAnecdote = await anecdoteService.addAnecdote(anecdote)
+    dispatch({
+      type:'ADD_ANECDOTE',
+      payload:newAnecdote
+    })
   }
+  
 }
 
 export function initAnecdotes(){
