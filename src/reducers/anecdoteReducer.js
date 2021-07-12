@@ -1,10 +1,9 @@
 import anecdoteService from "../services/anecdoteService"
 
-const getId = () => (100000 * Math.random()).toFixed(0)
 export  function anecdoteReducer(state = [], action) {
   
   switch(action.type){
-    case 'ADD_VOTES':
+    case '@anecdote/add_vote':
       const newState = state.map(item => {
         if(item.id === action.payload.id){
           return {...item, votes:item.votes +1}
@@ -13,7 +12,7 @@ export  function anecdoteReducer(state = [], action) {
       })
       return newState
 
-    case 'ADD_ANECDOTE':
+    case '@anecdote/add':
       return [...state, action.payload]
     
     case '@anecdote/init':
@@ -23,19 +22,22 @@ export  function anecdoteReducer(state = [], action) {
   }
 }
 export  function addVotes(id){
-  return {
-    type:'ADD_VOTES',
-    payload:{
-      id
-    }
-  }
+  return async dispatch =>{
+    await anecdoteService.setVote(id)
+    dispatch({
+      type:'@anecdote/add_vote',
+      payload:{
+        id
+      }
+    })
+  } 
 }
 
 export function addAnecdote(anecdote){
   return async dispatch =>{
     const newAnecdote = await anecdoteService.addAnecdote(anecdote)
     dispatch({
-      type:'ADD_ANECDOTE',
+      type:'@anecdote/add',
       payload:newAnecdote
     })
   }

@@ -23,5 +23,17 @@ const addAnecdote = async(anecdote) =>{
     throw new Error('Error service add anecdote')
   }
 }
+const setVote = async(id)=>{
+  try{
+    const {data:anecdote} = await axios.get(`${URL}/${id}`)
+    anecdote.votes = anecdote.votes+1
+    const {data:anecdoteUpdated} = await axios.put(`${URL}/${id}`, anecdote)
+    return anecdoteUpdated
 
-export default { getAll, addAnecdote}
+  }catch(error){
+    throw new Error('Error service set votes')
+  }
+  
+}
+
+export default { getAll, addAnecdote, setVote}
