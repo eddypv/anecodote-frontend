@@ -9,11 +9,19 @@ export function notificationReducer(state='', action){
   }
 }
 
-export function setNotification(message){
-  return {
-    type:'@notification/set',
-    payload:{
-      message
-    }
+export function setNotification(message, seconds=5){
+  return  dispatch =>{
+    let action = {
+      type:'@notification/set',
+      payload:{
+        message
+      }
+    } 
+    dispatch(action)
+    
+    setTimeout(()=>{
+      action.payload.message= ''
+      dispatch(action)
+    }, seconds*1000)
   }
 }
