@@ -32,8 +32,10 @@ export  function anecdoteReducer(state = initialState, action) {
       return newState
 
     case 'ADD_ANECDOTE':
-
       return [...state, action.payload]
+    
+    case '@anecdote/init':
+      return action.payload.anecdotes
 
     default: return state
   }
@@ -54,6 +56,15 @@ export function addAnecdote(anecdote){
       content:anecdote,
       id:getId(),
       votes:0
+    }
+  }
+}
+
+export function initAnecdotes(anecdotes){
+  return {
+    type:'@anecdote/init',
+    payload:{
+      anecdotes
     }
   }
 }
