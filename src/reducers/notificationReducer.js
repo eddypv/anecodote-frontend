@@ -1,4 +1,4 @@
-
+let timeOutId = undefined
 export function notificationReducer(state='', action){
 
   switch(action.type){
@@ -19,9 +19,15 @@ export function setNotification(message, seconds=5){
     } 
     dispatch(action)
     
-    setTimeout(()=>{
+    //verify already  timeOutId
+    if (typeof timeOutId === 'number'){
+      clearTimeout(timeOutId)
+    }
+    // clean notification
+    timeOutId= setTimeout(()=>{
       action.payload.message= ''
       dispatch(action)
+      timeOutId= undefined
     }, seconds*1000)
   }
 }

@@ -28,10 +28,6 @@ const AnecdoteList = ()=>{
     const message = `You voted '${content}'`
     dispatch(addVotes(id))
     dispatch(setNotification(message))
-
-    setTimeout(()=>{
-      dispatch(setNotification(''))
-    },5000)
   }
   return(
     <>
