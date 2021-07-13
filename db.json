@@ -49,6 +49,11 @@
       "content": "Tests",
       "votes": 0,
       "id": 10
+    },
+    {
+      "content": "New Anecdote",
+      "votes": 2,
+      "id": 11
     }
   ]
 }
